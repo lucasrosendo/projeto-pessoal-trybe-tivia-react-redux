@@ -1,16 +1,32 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { actionToStore, actionGetTokenWithThunk } from '../actions';
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
 
     this.state = {
       login: '',
       name: '',
       disable: true,
     };
+  }
+
+  handleClick() {
+    const { getToken, history, getStateToStore } = this.props;
+    getToken().then((data) => {
+      const { payload: { token } } = data;
+      const tokenStore = token;
+      const toStorage = JSON.stringify(tokenStore);
+      localStorage.setItem('token', toStorage);
+    });
+    getStateToStore(this.state);
+    history.push('/game');
   }
 
   handleChange({ target }) {
@@ -55,7 +71,7 @@ class Login extends React.Component {
             type="button"
             data-testid="btn-play"
             disabled={ disable }
-            onClick={ console.log('teste') }
+            onClick={ this.handleClick }
           >
             Jogar
           </button>
@@ -65,4 +81,15 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+Login.propTypes = {
+  getToken: PropTypes.func.isRequired,
+  history: PropTypes.string.isRequired,
+  getStateToStore: PropTypes.func.isRequired,
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  getToken: () => dispatch(actionGetTokenWithThunk()),
+  getStateToStore: (test) => dispatch(actionToStore(test)),
+});
+
+export default connect(null, mapDispatchToProps)(Login);
