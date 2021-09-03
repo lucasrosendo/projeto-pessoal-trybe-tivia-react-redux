@@ -7,7 +7,7 @@ import {
 
 const INITIAL_STATE = {
   token: '',
-  name: '',
+  name: 'Player',
   login: '',
   isLoading: false,
   erro: null,
