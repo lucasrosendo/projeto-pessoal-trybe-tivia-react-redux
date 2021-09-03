@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { actionToStore, actionGetTokenWithThunk } from '../actions';
+import './style/Login.css';
 
 class Login extends React.Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class Login extends React.Component {
     };
   }
 
-  handleClick() {
+  handleClick({ target }) {
     const { getToken, history, getStateToStore } = this.props;
     getToken().then((data) => {
       const { payload: { token } } = data;
@@ -26,8 +26,9 @@ class Login extends React.Component {
       const toStorage = JSON.stringify(tokenStore);
       localStorage.setItem('token', toStorage);
     });
+
     getStateToStore(this.state);
-    history.push('/game');
+    history.push(`/${target.name}`);
   }
 
   handleChange({ target }) {
@@ -44,12 +45,12 @@ class Login extends React.Component {
 
   render() {
     const { login, name, disable } = this.state;
-    const { handleChange } = this;
+    const { handleChange, handleClick } = this;
     return (
-      <div>
-        <form>
+      <main className="login-main">
+        <form className="login-form-container">
           <label htmlFor="email">
-            Login:
+            Email do Gravatar:
             <input
               value={ login }
               onChange={ handleChange }
@@ -59,7 +60,7 @@ class Login extends React.Component {
             />
           </label>
           <label htmlFor="name">
-            Nome:
+            Nome do Jogador:
             <input
               value={ name }
               onChange={ handleChange }
@@ -69,27 +70,26 @@ class Login extends React.Component {
             />
           </label>
           <button
-            type="button"
+            className="login-form-btn"
             data-testid="btn-play"
+            type="button"
             disabled={ disable }
-            onClick={ this.handleClick }
+            onClick={ handleClick }
+            name="game"
           >
             Jogar
           </button>
-          <div>
-            <Link
-              to="/settings"
-            >
-              <button
-                data-testid="btn-settings"
-                type="button"
-              >
-                Configurações
-              </button>
-            </Link>
-          </div>
+          <button
+            className="login-form-btn"
+            data-testid="btn-settings"
+            type="button"
+            onClick={ handleClick }
+            name="settings"
+          >
+            Configurações
+          </button>
         </form>
-      </div>
+      </main>
     );
   }
 }
