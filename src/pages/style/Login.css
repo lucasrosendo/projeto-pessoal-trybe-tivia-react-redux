@@ -14,7 +14,7 @@
 
 .login-form-container {
   align-items: center;
-  background-color: white;
+  background-color: rgb(57, 109, 124);
   border: 2px solid red;
   display: flex;
   flex-direction: column;

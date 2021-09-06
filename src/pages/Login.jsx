@@ -96,7 +96,7 @@ class Login extends React.Component {
 
 Login.propTypes = {
   getToken: PropTypes.func.isRequired,
-  history: PropTypes.string.isRequired,
+  history: PropTypes.objectOf(Object).isRequired,
   getStateToStore: PropTypes.func.isRequired,
 };
 
