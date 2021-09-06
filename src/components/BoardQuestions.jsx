@@ -19,10 +19,10 @@ class BoardQuestions extends React.Component {
       isLoading: true,
       numberOfClicks: 0,
       buttonNxtQst: false,
-      correctAnswer: '3',
-      incorrectAnswers: ['4', '5'],
-      question: '2',
-      category: '1',
+      correctAnswer: '',
+      incorrectAnswers: ['', ''],
+      question: '',
+      category: '',
     };
   }
 
@@ -35,12 +35,14 @@ class BoardQuestions extends React.Component {
     const { numberOfClicks } = this.state;
     const NUMBER_MAX = 4;
 
-    this.setState({
-      question: currentQuestion.question,
-      category: currentQuestion.category,
-      correctAnswer: currentQuestion.correct_answer,
-      incorrectAnswers: currentQuestion.incorrect_answers,
-    });
+    setTimeout(() => {
+      this.setState({
+        question: currentQuestion.question,
+        category: currentQuestion.category,
+        correctAnswer: currentQuestion.correct_answer,
+        incorrectAnswers: currentQuestion.incorrect_answers,
+      });
+    }, 100);
 
     this.setState({ isLoading, numberOfClicks: numberOfClicks + 1 });
 
@@ -51,9 +53,8 @@ class BoardQuestions extends React.Component {
 
   async fetchApiAndState() {
     const { fetchAPI } = this.props;
-
     await fetchAPI();
-    this.setQuestionState();
+    await this.setQuestionState();
   }
 
   async handleClick() {
@@ -69,27 +70,42 @@ class BoardQuestions extends React.Component {
     if (isLoading) return <h1>Estamos procurando perguntas para você</h1>;
     return (
       <div>
-        <div>
-          <h2 data-testid="question-category">{category}</h2>
-          <h1 data-testid="question-text">{question}</h1>
-          <button type="button" data-testid="correct-answer">{correctAnswer}</button>
-          {incorrectAnswers.map((answer, index) => (
+        <div className="game-container">
+          <div className="game-category">
+            <p data-testid="question-category">{category}</p>
+          </div>
+          <div className="game-question">
+            <h1 data-testid="question-text">{question}</h1>
+          </div>
+          <div className="game-answers">
             <button
-              key={ index }
               type="button"
-              data-testid={ `wrong-answer-${index}` }
+              data-testid="correct-answer"
+              className="correct-answer"
             >
-              {answer}
+              {correctAnswer}
             </button>
-          ))}
+            {incorrectAnswers.map((answer, index) => (
+              <button
+                key={ index }
+                type="button"
+                data-testid={ `wrong-answer-${index}` }
+                className="incorrect-answer"
+              >
+                {answer}
+              </button>
+            ))}
+          </div>
         </div>
-        <button
-          onClick={ this.handleClick }
-          type="button"
-          disabled={ buttonNxtQst }
-        >
-          Next Question
-        </button>
+        <div className="game-next-question">
+          <button
+            onClick={ this.handleClick }
+            type="button"
+            disabled={ buttonNxtQst }
+          >
+            Next Question
+          </button>
+        </div>
       </div>
     );
   }

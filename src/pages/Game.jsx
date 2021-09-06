@@ -7,7 +7,7 @@ import './style/Game.css';
 class Game extends React.Component {
   render() {
     return (
-      <div>
+      <div className="main">
         <Header />
         <BoardQuestions />
       </div>
