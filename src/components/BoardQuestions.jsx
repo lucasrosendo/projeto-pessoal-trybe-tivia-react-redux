@@ -102,7 +102,7 @@ class BoardQuestions extends React.Component {
             onClick={ this.handleClick }
             type="button"
             disabled={ buttonNxtQst }
-            data-testid="btn-next"
+            data-testid="btn-nexts"
           >
             Next Question
           </button>

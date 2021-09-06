@@ -4,7 +4,6 @@ body {
   display: flex;
   height: 100vh;
   justify-content: center;
-  align-items: center;
 }
 
 .main {
@@ -25,30 +24,30 @@ body {
 }
 
 .game-container {
-  width: 50vw;
-  padding: 10px;
   background-color: rgb(57, 109, 124);
+  padding: 10px;
+  width: 50vw;
 }
 
 .game-category {
-  color: white;
-  text-align: center;
   border-bottom: 3px solid white;
   border-top: 3px solid white;
+  color: white;
   padding: 10px;
+  text-align: center;
 }
 
 .game-question {
+  border-bottom: 3px solid white;
   color: rgba(0, 0, 0, 0.7);
   padding: 10px;
-  border-bottom: 3px solid white;
 }
 
 .game-answers {
-  padding: 10px;
   display: flex;
   justify-content: space-evenly;
   margin-top: 20px;
+  padding: 10px;
 }
 
 .game-answers button {
@@ -57,39 +56,37 @@ body {
 }
 
 .game-next-question {
-  width: 50vw;
-  padding: 10px;
-  background-color: white;
+  background-color: rgb(57, 109, 124);
   display: flex;
   justify-content: center;
-  background-color: rgb(57, 109, 124);
+  padding: 10px;
+  width: 50vw;
 }
 
 .game-next-question button {
-  width: 100%;
+  background: linear-gradient(to bottom, #79bbff 5%, #378de5 100%);
+  background-color: #79bbff;
+  border: 1px solid #337bc4;
+  border-radius: 5px;
+  box-shadow: 3px 4px 0 0 #1564ad;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 17px;
+  font-weight: 900;
   height: 50px;
-  box-shadow: 3px 4px 0px 0px #1564ad;
-	background:linear-gradient(to bottom, #79bbff 5%, #378de5 100%);
-	background-color:#79bbff;
-	border-radius:5px;
-	border:1px solid #337bc4;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:17px;
-	font-weight:bold;
-	padding:12px 44px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #528ecc;
+  padding: 12px 44px;
+  text-decoration: none;
+  text-shadow: 0 1px 0 #528ecc;
+  width: 100%;
 }
 
 .game-next-question button:hover {
-background:linear-gradient(to bottom, #378de5 5%, #79bbff 100%);
-	background-color:#378de5;
+  background: linear-gradient(to bottom, #378de5 5%, #79bbff 100%);
+  background-color: #378de5;
 }
 
 .game-next-question button:active {
-position:relative;
-top:1px;
+  position: relative;
+  top: 1px;
 }
