@@ -25,6 +25,7 @@ export const actionGetTokenWithThunk = () => (dispatch) => {
       () => dispatch(actionGetTokenFailed()),
     );
 };
+
 // ==================================================================================//
 
 export const actionTriviaLoading = () => ({ type: GET_TRIVIA_LOADING });
@@ -42,3 +43,4 @@ export const actionGetTriviaWithThunk = (token) => (
     }
   }
 );
+

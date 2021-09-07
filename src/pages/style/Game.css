@@ -6,9 +6,13 @@ body {
   justify-content: center;
 }
 
+.main {
+  border: 2px solid red;
+}
+
 .game-header {
   align-items: center;
-  background-color: white;
+  background-color: rgb(57, 109, 124);
   display: flex;
   justify-content: space-around;
   padding: 10px;
@@ -17,4 +21,72 @@ body {
 
 .game-gravatar-picture {
   border-radius: 100%;
+}
+
+.game-container {
+  background-color: rgb(57, 109, 124);
+  padding: 10px;
+  width: 50vw;
+}
+
+.game-category {
+  border-bottom: 3px solid white;
+  border-top: 3px solid white;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+
+.game-question {
+  border-bottom: 3px solid white;
+  color: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+}
+
+.game-answers {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+.game-answers button {
+  cursor: pointer;
+  height: 30px;
+}
+
+.game-next-question {
+  background-color: rgb(57, 109, 124);
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  width: 50vw;
+}
+
+.game-next-question button {
+  background: linear-gradient(to bottom, #79bbff 5%, #378de5 100%);
+  background-color: #79bbff;
+  border: 1px solid #337bc4;
+  border-radius: 5px;
+  box-shadow: 3px 4px 0 0 #1564ad;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 17px;
+  font-weight: 900;
+  height: 50px;
+  padding: 12px 44px;
+  text-decoration: none;
+  text-shadow: 0 1px 0 #528ecc;
+  width: 100%;
+}
+
+.game-next-question button:hover {
+  background: linear-gradient(to bottom, #378de5 5%, #79bbff 100%);
+  background-color: #378de5;
+}
+
+.game-next-question button:active {
+  position: relative;
+  top: 1px;
 }
