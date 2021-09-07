@@ -2,6 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class Trivia extends React.Component {
+  htmldecode(str) {
+    const txt = document.createElement('textarea');
+    txt.innerHTML = str;
+    return txt.value;
+  }
+
   render() {
     const { question } = this.props;
     return (
@@ -12,7 +18,7 @@ class Trivia extends React.Component {
           data-testid="correct-answer"
           type="button"
         >
-          {question.correct_answer}
+          {this.htmldecode(question.correct_answer)}
         </button>
         {question.incorrect_answers.map((answer, index) => (
           <button
