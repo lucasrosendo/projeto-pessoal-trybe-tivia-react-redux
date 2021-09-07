@@ -18,15 +18,18 @@ class Login extends React.Component {
     };
   }
 
-  handleClick({ target }) {
-    const { getToken, history, getStateToStore } = this.props;
+  componentDidMount() {
+    const { getToken } = this.props;
     getToken().then((data) => {
       const { payload: { token } } = data;
       const tokenStore = token;
       const toStorage = JSON.stringify(tokenStore);
       localStorage.setItem('token', toStorage);
     });
+  }
 
+  handleClick({ target }) {
+    const { history, getStateToStore } = this.props;
     getStateToStore(this.state);
     history.push(`/${target.name}`);
   }
@@ -96,7 +99,7 @@ class Login extends React.Component {
 
 Login.propTypes = {
   getToken: PropTypes.func.isRequired,
-  history: PropTypes.string.isRequired,
+  history: PropTypes.objectOf(Object).isRequired,
   getStateToStore: PropTypes.func.isRequired,
 };
 

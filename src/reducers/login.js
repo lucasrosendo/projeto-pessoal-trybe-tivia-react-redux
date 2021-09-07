@@ -15,16 +15,16 @@ const INITIAL_STATE = {
 
 const reducerLogin = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+  case GET_STATE_STORE:
+    return {
+      ...state,
+      name: action.payload.name,
+      login: action.payload.login,
+    };
   case GET_TOKEN_LOADING:
     return {
       ...state,
       isLoading: true,
-    };
-  case GET_TOKEN:
-    return {
-      ...state,
-      isLoading: false,
-      token: action.payload.token,
     };
   case GET_TOKEN_FAILED:
     return {
@@ -32,11 +32,11 @@ const reducerLogin = (state = INITIAL_STATE, action) => {
       isLoading: false,
       erro: action.payload.response_message,
     };
-  case GET_STATE_STORE:
+  case GET_TOKEN:
     return {
       ...state,
-      name: action.payload.name,
-      login: action.payload.login,
+      isLoading: false,
+      token: action.payload.token,
     };
   default:
     return state;
