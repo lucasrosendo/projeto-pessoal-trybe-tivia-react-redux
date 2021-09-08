@@ -6,11 +6,13 @@ class Responses extends React.Component {
     super();
 
     this.handleClick = this.handleClick.bind(this);
+    this.nextClick = this.nextClick.bind(this);
 
     this.state = {
       displayBtn: 'none',
-      correctAnswerStyle: '',
-      incorrectAnswerStyle: '',
+      correctAnswerStyle: null,
+      incorrectAnswerStyle: null,
+      statusBtn: false,
     };
   }
 
@@ -19,6 +21,16 @@ class Responses extends React.Component {
       displayBtn: 'block',
       correctAnswerStyle: 'correct',
       incorrectAnswerStyle: 'incorrect',
+      statusBtn: true,
+    });
+  }
+
+  nextClick() {
+    this.setState({
+      displayBtn: 'none',
+      correctAnswerStyle: null,
+      incorrectAnswerStyle: null,
+      statusBtn: false,
     });
   }
 
@@ -30,7 +42,8 @@ class Responses extends React.Component {
 
   render() {
     const { correctAnswer, incorrectAnswers } = this.props;
-    const { displayBtn, correctAnswerStyle, incorrectAnswerStyle } = this.state;
+    const { displayBtn, correctAnswerStyle, incorrectAnswerStyle, statusBtn,
+    } = this.state;
     return (
       <div>
         <div className="game-answers">
@@ -39,6 +52,7 @@ class Responses extends React.Component {
             className={ correctAnswerStyle }
             type="button"
             data-testid="correct-answer"
+            disabled={ statusBtn }
           >
             {this.htmldecode(correctAnswer)}
           </button>
@@ -49,6 +63,7 @@ class Responses extends React.Component {
               key={ index }
               type="button"
               data-testid={ `wrong-answer${index}` }
+              disabled={ statusBtn }
             >
               {this.htmldecode(answer)}
             </button>
@@ -56,6 +71,7 @@ class Responses extends React.Component {
         </div>
         <div className="game-next-question">
           <button
+            onClick={ this.nextClick }
             style={ { display: displayBtn } }
             data-testid="btn-next"
             type="button"
@@ -70,7 +86,7 @@ class Responses extends React.Component {
 
 Responses.propTypes = {
   correctAnswer: PropTypes.string.isRequired,
-  incorrectAnswers: PropTypes.string.isRequired,
+  incorrectAnswers: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default Responses;
