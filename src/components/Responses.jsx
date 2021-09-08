@@ -58,8 +58,6 @@ class Responses extends React.Component {
   }
 
   handleClick({ target: { name } }) {
-    // const { correctAnswer } = this.props;
-    // const correct = this.htmldecode(correctAnswer);
     const magicNumber = 10;
 
     const timer = this.handleTimer();
@@ -67,11 +65,11 @@ class Responses extends React.Component {
 
     if (name === 'correct') {
       const sum = (magicNumber + (timer * points));
-      const testando = (JSON.parse(localStorage.getItem('state')));
-      let number = testando.player.score;
+      const storage = (JSON.parse(localStorage.getItem('state')));
+      let number = storage.player.score;
       number += sum;
-      JSON.stringify((testando.player.score) = number);
-      localStorage.setItem('state', JSON.stringify(testando));
+      JSON.stringify((storage.player.score) = number);
+      localStorage.setItem('state', JSON.stringify(storage));
     }
     this.handleCountdown();
   }
