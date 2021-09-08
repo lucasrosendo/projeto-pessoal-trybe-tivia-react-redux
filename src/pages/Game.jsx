@@ -8,25 +8,17 @@ import { actionGetTriviaWithThunk } from '../actions';
 import './style/Game.css';
 
 class Game extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      index: 0,
-    };
-  }
-
   componentDidMount() {
     const { fetchQuestions, token, name, email } = this.props;
     fetchQuestions(token);
 
-    localStorage.setItem('player', JSON
-      .stringify({ name, assertions: 0, score: 0, gravatarEmail: email }));
+    localStorage.setItem('state', JSON
+      .stringify({ player: { name, assertions: 0, score: 0, gravatarEmail: email } }));
   }
 
   render() {
-    const { questions, isLoading } = this.props;
-    const { index } = this.state;
+    const { questions, isLoading, index } = this.props;
+
     if (isLoading === true) return <h1>CARREGANDO GAME...</h1>;
     return (
       <div className="main">
@@ -43,6 +35,7 @@ const mapStateToProps = (state) => ({
   isLoading: state.trivia.isLoading,
   name: state.login.name,
   email: state.login.login,
+  index: state.trivia.indexQuestion,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -56,6 +49,7 @@ Game.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   name: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
+  index: PropTypes.bool.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);
