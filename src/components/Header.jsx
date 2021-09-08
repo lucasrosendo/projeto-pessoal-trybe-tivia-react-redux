@@ -35,11 +35,13 @@ class Header extends React.Component {
           {' '}
           { player }
         </span>
-        <span data-testid="header-score">
+        <label htmlFor="value">
           Pontos:
           {' '}
-          { valor }
-        </span>
+          <span id="value" data-testid="header-score">
+            { valor }
+          </span>
+        </label>
       </header>
     );
   }
