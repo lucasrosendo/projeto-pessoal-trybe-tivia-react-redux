@@ -26,7 +26,7 @@ class Game extends React.Component {
     const { index } = this.state;
     if (isLoading === true) return <h1>CARREGANDO GAME...</h1>;
     return (
-      <div>
+      <div className="main">
         <Header />
         <Trivia question={ questions[index] } />
       </div>
