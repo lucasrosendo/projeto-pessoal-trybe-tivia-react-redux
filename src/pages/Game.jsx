@@ -17,8 +17,11 @@ class Game extends React.Component {
   }
 
   componentDidMount() {
-    const { fetchQuestions, token } = this.props;
+    const { fetchQuestions, token, name, email } = this.props;
     fetchQuestions(token);
+
+    localStorage.setItem('player', JSON
+      .stringify({ name, assertions: 0, score: 0, gravatarEmail: email }));
   }
 
   render() {
@@ -38,6 +41,8 @@ const mapStateToProps = (state) => ({
   token: state.login.token,
   questions: state.trivia.allQuestions,
   isLoading: state.trivia.isLoading,
+  name: state.login.name,
+  email: state.login.login,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -49,6 +54,8 @@ Game.propTypes = {
   token: PropTypes.string.isRequired,
   questions: PropTypes.arrayOf(PropTypes.object).isRequired,
   isLoading: PropTypes.bool.isRequired,
+  name: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);
