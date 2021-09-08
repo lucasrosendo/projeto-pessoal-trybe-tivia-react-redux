@@ -50,16 +50,17 @@ body {
   padding: 10px;
 }
 
-.game-answers button {
+.game-answer-button {
   cursor: pointer;
-  height: 30px;
+  min-height: 30px;
+  min-width: 60px;
 }
 
 .game-next-question {
   background-color: rgb(57, 109, 124);
   display: flex;
   justify-content: center;
-  padding: 10px;
+  padding: 10px 0;
   width: 50vw;
 }
 

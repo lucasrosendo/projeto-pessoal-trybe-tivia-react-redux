@@ -1,34 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Question from './Question';
+import Responses from './Responses';
 
 class Trivia extends React.Component {
-  htmldecode(str) {
-    const txt = document.createElement('textarea');
-    txt.innerHTML = str;
-    return txt.value;
-  }
-
   render() {
     const { question } = this.props;
     return (
-      <div>
-        <p data-testid="question-category">{question.category}</p>
-        <p data-testid="question-text">{question.question}</p>
-        <button
-          data-testid="correct-answer"
-          type="button"
-        >
-          {this.htmldecode(question.correct_answer)}
-        </button>
-        {question.incorrect_answers.map((answer, index) => (
-          <button
-            data-testid={ `wrong-answer-${index}` }
-            type="button"
-            key={ index }
-          >
-            {answer}
-          </button>
-        ))}
+      <div className="game-container">
+        <Question
+          category={ question.category }
+          question={ question.question }
+        />
+        <Responses
+          correctAnswer={ question.correct_answer }
+          incorrectAnswers={ question.incorrect_answers }
+        />
       </div>
     );
   }
