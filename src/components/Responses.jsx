@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Countdown from 'react-countdown';
 
 class Responses extends React.Component {
   constructor() {
@@ -44,6 +45,7 @@ class Responses extends React.Component {
     const { correctAnswer, incorrectAnswers } = this.props;
     const { displayBtn, correctAnswerStyle, incorrectAnswerStyle, statusBtn,
     } = this.state;
+    const TIMER = 30000;
     return (
       <div>
         <div className="game-answers">
@@ -79,6 +81,7 @@ class Responses extends React.Component {
             Next
           </button>
         </div>
+        <h4><Countdown date={ Date.now() + TIMER } onComplete={ this.handleClick } /></h4>
       </div>
     );
   }
