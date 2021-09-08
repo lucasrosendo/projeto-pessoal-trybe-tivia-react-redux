@@ -7,16 +7,20 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
     const { state: { email, name } } = this.props;
+
     this.state = {
-      score: 0,
       player: name,
       gravatarPicture: email,
     };
   }
 
   render() {
-    const { score, player, gravatarPicture } = this.state;
+    const { player, gravatarPicture } = this.state;
     const hash = MD5(gravatarPicture).toString();
+
+    const getStorage = JSON.parse(localStorage.getItem('state'));
+    const valor = getStorage.player.score;
+
     return (
       <header className="game-header">
         <img
@@ -34,7 +38,7 @@ class Header extends React.Component {
         <span data-testid="header-score">
           Pontos:
           {' '}
-          { score }
+          { valor }
         </span>
       </header>
     );
