@@ -9,11 +9,17 @@ class Responses extends React.Component {
 
     this.state = {
       displayBtn: 'none',
+      correctAnswerStyle: '',
+      incorrectAnswerStyle: '',
     };
   }
 
   handleClick() {
-    this.setState({ displayBtn: 'block' });
+    this.setState({
+      displayBtn: 'block',
+      correctAnswerStyle: 'correct',
+      incorrectAnswerStyle: 'incorrect',
+    });
   }
 
   htmldecode(value) {
@@ -24,13 +30,13 @@ class Responses extends React.Component {
 
   render() {
     const { correctAnswer, incorrectAnswers } = this.props;
-    const { displayBtn } = this.state;
+    const { displayBtn, correctAnswerStyle, incorrectAnswerStyle } = this.state;
     return (
       <div>
         <div className="game-answers">
           <button
             onClick={ this.handleClick }
-            className="game-answer-button"
+            className={ correctAnswerStyle }
             type="button"
             data-testid="correct-answer"
           >
@@ -39,7 +45,7 @@ class Responses extends React.Component {
           {incorrectAnswers.map((answer, index) => (
             <button
               onClick={ this.handleClick }
-              className="game-answer-button"
+              className={ incorrectAnswerStyle }
               key={ index }
               type="button"
               data-testid={ `wrong-answer${index}` }
