@@ -13,14 +13,14 @@ class Responses extends React.Component {
     this.nextClick = this.nextClick.bind(this);
     this.handleTimer = this.handleTimer.bind(this);
     this.handlePoints = this.handlePoints.bind(this);
-    this.handleCountdown = this.handleCountdown.bind(this);
+    this.countdown = this.countdown.bind(this);
 
     this.state = {
       displayBtn: 'none',
       correctAnswerStyle: null,
       incorrectAnswerStyle: null,
       statusBtn: false,
-      timer: 30000,
+      t: 30000,
       redirect: false,
     };
   }
@@ -47,31 +47,44 @@ class Responses extends React.Component {
     return testing;
   }
 
-  handleCountdown() {
+  countdown() {
     this.setState({
       displayBtn: 'block',
       correctAnswerStyle: 'correct',
       incorrectAnswerStyle: 'incorrect',
       statusBtn: true,
-      timer: 0,
+      t: 0,
     });
   }
 
-  handleClick({ target: { name } }) {
+  sumScore() {
+    const storage = (JSON.parse(localStorage.getItem('state')));
     const magicNumber = 10;
-
     const timer = this.handleTimer();
     const points = this.handlePoints();
+    const sum = (magicNumber + (timer * points));
 
+    const number = storage.player.score + sum;
+
+    JSON.stringify((storage.player.score) = number);
+    localStorage.setItem('state', JSON.stringify(storage));
+  }
+
+  sumAssertions() {
+    const storage = (JSON.parse(localStorage.getItem('state')));
+
+    const acertos = storage.player.assertions + 1;
+
+    JSON.stringify((storage.player.assertions) = acertos);
+    localStorage.setItem('state', JSON.stringify(storage));
+  }
+
+  handleClick({ target: { name } }) {
     if (name === 'correct') {
-      const sum = (magicNumber + (timer * points));
-      const storage = (JSON.parse(localStorage.getItem('state')));
-      let number = storage.player.score;
-      number += sum;
-      JSON.stringify((storage.player.score) = number);
-      localStorage.setItem('state', JSON.stringify(storage));
+      this.sumScore();
+      this.sumAssertions();
     }
-    this.handleCountdown();
+    this.countdown();
   }
 
   nextClick() {
@@ -82,7 +95,7 @@ class Responses extends React.Component {
       correctAnswerStyle: null,
       incorrectAnswerStyle: null,
       statusBtn: false,
-      timer: 30000,
+      t: 30000,
     });
     if (index < number) nextQuestion();
 
@@ -101,7 +114,7 @@ class Responses extends React.Component {
 
   render() {
     const { correctAnswer, incorrectAnswers } = this.props;
-    const { displayBtn, correctAnswerStyle, incorrectAnswerStyle, statusBtn, timer,
+    const { displayBtn, correctAnswerStyle, incorrectAnswerStyle, statusBtn, t,
       redirect,
     } = this.state;
     return (
@@ -143,7 +156,7 @@ class Responses extends React.Component {
           </button>
         </div>
         <h4 id="test-clock">
-          <Countdown date={ Date.now() + timer } onComplete={ this.handleCountdown } />
+          <Countdown date={ Date.now() + t } onComplete={ this.countdown } key={ t } />
         </h4>
         { redirect && <Redirect to="/feedback" /> }
       </div>

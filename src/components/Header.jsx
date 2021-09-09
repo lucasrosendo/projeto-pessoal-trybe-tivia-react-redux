@@ -16,6 +16,7 @@ class Header extends React.Component {
 
   render() {
     const { player, gravatarPicture } = this.state;
+    const { testid } = this.props;
     const hash = MD5(gravatarPicture).toString();
 
     const getStorage = JSON.parse(localStorage.getItem('state'));
@@ -38,7 +39,7 @@ class Header extends React.Component {
         <label htmlFor="value">
           Pontos:
           {' '}
-          <span id="value" data-testid="header-score">
+          <span id="value" data-testid={ testid }>
             { valor }
           </span>
         </label>
