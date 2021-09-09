@@ -4,6 +4,7 @@ import Countdown from 'react-countdown';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { actionGetIndexQuestion } from '../actions';
+import Answers from './Answers';
 
 class Responses extends React.Component {
   constructor() {
@@ -106,45 +107,20 @@ class Responses extends React.Component {
     }
   }
 
-  htmldecode(value) {
-    const correct = document.createElement('textarea');
-    correct.innerHTML = value;
-    return correct.value;
-  }
-
   render() {
-    const { correctAnswer, incorrectAnswers } = this.props;
+    const { correctAnswer } = this.props;
     const { displayBtn, correctAnswerStyle, incorrectAnswerStyle, statusBtn, t,
       redirect,
     } = this.state;
     return (
-      <div>
-        <div className="game-answers">
-          <button
-            onClick={ this.handleClick }
-            className={ correctAnswerStyle }
-            name="correct"
-            // value={ this.htmldecode(correctAnswer) }
-            type="button"
-            data-testid="correct-answer"
-            disabled={ statusBtn }
-          >
-            {this.htmldecode(correctAnswer)}
-          </button>
-          {incorrectAnswers.map((answer, index) => (
-            <button
-              onClick={ this.handleClick }
-              className={ incorrectAnswerStyle }
-              key={ index }
-              name="incorrect"
-              type="button"
-              data-testid={ `wrong-answer${index}` }
-              disabled={ statusBtn }
-            >
-              {this.htmldecode(answer)}
-            </button>
-          ))}
-        </div>
+      <div className="game-answers">
+        <Answers
+          onClick={ this.handleClick }
+          className={ correctAnswerStyle }
+          disabled={ statusBtn }
+          incorrectClass={ incorrectAnswerStyle }
+          correctAnswer={ correctAnswer }
+        />
         <div className="game-next-question">
           <button
             onClick={ this.nextClick }
@@ -170,7 +146,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 Responses.propTypes = {
   correctAnswer: PropTypes.string.isRequired,
-  incorrectAnswers: PropTypes.arrayOf(PropTypes.string).isRequired,
   myQuestion: PropTypes.arrayOf(Object).isRequired,
   nextQuestion: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,

@@ -2,6 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 class Ranking extends React.Component {
+  constructor(props) {
+    super(props);
+    console.log(props);
+  }
+
   render() {
     return (
       <>
@@ -10,7 +15,11 @@ class Ranking extends React.Component {
         >
           Ranking
         </h1>
-        <Link to="/" data-testid="btn-go-home">
+        <Link
+          to="/"
+          data-testid="btn-go-home"
+          className="login-form-btn"
+        >
           Retorna ao início
         </Link>
       </>
