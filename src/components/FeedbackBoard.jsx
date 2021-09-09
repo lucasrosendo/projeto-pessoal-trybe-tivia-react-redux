@@ -41,12 +41,14 @@ class FeedbackBoard extends React.Component {
           { finalScore }
         </h4>
         <Link
+          className="login-form-btn"
           to="/"
           data-testid="btn-play-again"
         >
           Jogar novamente
         </Link>
         <Link
+          className="login-form-btn"
           to="/ranking"
           data-testid="btn-ranking"
         >
