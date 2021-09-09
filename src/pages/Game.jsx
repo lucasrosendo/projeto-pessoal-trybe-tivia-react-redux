@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import Trivia from '../components/Trivia';
-import { actionGetTriviaWithThunk } from '../actions';
+import { actionGetTriviaWithThunk, actionShuffleQuestions } from '../actions';
 
 import './style/Game.css';
 
@@ -17,7 +17,13 @@ class Game extends React.Component {
   }
 
   render() {
-    const { questions, isLoading, index } = this.props;
+    const { questions, isLoading, index, sendShuffleQuestions } = this.props;
+
+    if (!questions[index]) return <h1>CARREGANDO GAME...</h1>;
+    const test = questions[index].correct_answer;
+    const test1 = questions[index].incorrect_answers;
+    const array = [...test1, test];
+    sendShuffleQuestions(array);
 
     if (isLoading === true) return <h1>CARREGANDO GAME...</h1>;
     return (
@@ -40,6 +46,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   fetchQuestions: (payload) => dispatch(actionGetTriviaWithThunk(payload)),
+  sendShuffleQuestions: (array) => dispatch(actionShuffleQuestions(array)),
 });
 
 Game.propTypes = {
@@ -50,6 +57,7 @@ Game.propTypes = {
   name: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
   index: PropTypes.bool.isRequired,
+  sendShuffleQuestions: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);

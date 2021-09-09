@@ -3,13 +3,17 @@ import {
   GET_TRIVIA_FAILED,
   GET_TRIVIA,
   GET_INDEX_QUESTION,
+  SHUFFLE,
 } from '../actions/actionTypes';
+
+import shuffleAnswers from '../helpers/shuffleAnswers';
 
 const INITIAL_STATE = {
   allQuestions: [],
   isLoading: true,
   erro: null,
   indexQuestion: 0,
+  shuffleQuestions: [],
 };
 
 const reducerTrivia = (state = INITIAL_STATE, action) => {
@@ -25,6 +29,7 @@ const reducerTrivia = (state = INITIAL_STATE, action) => {
       erro: action.payload.response_code,
     };
   case GET_TRIVIA:
+    console.log(action.payload);
     return {
       ...state,
       allQuestions: action.payload,
@@ -34,6 +39,11 @@ const reducerTrivia = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       indexQuestion: state.indexQuestion + 1,
+    };
+  case SHUFFLE:
+    return {
+      ...state,
+      shuffleQuestions: shuffleAnswers(action.array),
     };
   default:
     return {

@@ -6,6 +6,7 @@ import {
   GET_TRIVIA_LOADING,
   GET_TRIVIA,
   GET_INDEX_QUESTION,
+  SHUFFLE,
 } from './actionTypes';
 import getCurrentToken from '../utilities/getCurrentToken';
 import getQuestions from '../utilities/getQuestions';
@@ -46,3 +47,10 @@ export const actionGetTriviaWithThunk = (token) => (
     }
   }
 );
+
+// ==========================//=======================
+
+export const actionShuffleQuestions = (array) => ({
+  type: SHUFFLE,
+  array,
+});
