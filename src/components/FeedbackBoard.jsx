@@ -46,6 +46,12 @@ class FeedbackBoard extends React.Component {
         >
           Jogar novamente
         </Link>
+        <Link
+          to="/ranking"
+          data-testid="btn-ranking"
+        >
+          Ver Ranking
+        </Link>
       </div>
     );
   }

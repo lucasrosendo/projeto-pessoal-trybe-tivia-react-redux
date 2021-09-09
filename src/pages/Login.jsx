@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { actionToStore, actionGetTokenWithThunk } from '../actions';
 import './style/Login.css';
+import Buttons from '../components/Buttons';
 
 class Login extends React.Component {
   constructor(props) {
@@ -72,25 +73,10 @@ class Login extends React.Component {
               data-testid="input-player-name"
             />
           </label>
-          <button
-            className="login-form-btn"
-            data-testid="btn-play"
-            type="button"
+          <Buttons
             disabled={ disable }
             onClick={ handleClick }
-            name="game"
-          >
-            Jogar
-          </button>
-          <button
-            className="login-form-btn"
-            data-testid="btn-settings"
-            type="button"
-            onClick={ handleClick }
-            name="settings"
-          >
-            Configurações
-          </button>
+          />
         </form>
       </main>
     );
