@@ -22,7 +22,7 @@ class Game extends React.Component {
     if (isLoading === true) return <h1>CARREGANDO GAME...</h1>;
     return (
       <div className="main">
-        <Header />
+        <Header testid="header-score" />
         <Trivia question={ questions[index] } />
       </div>
     );
