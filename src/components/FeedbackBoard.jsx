@@ -1,6 +1,19 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class FeedbackBoard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    const { history } = this.props;
+    // history.push('/');
+    console.log(history);
+  }
+
   handleResponse() {
     const getStorage = JSON.parse(localStorage.getItem('state'));
     const assert = getStorage.player.assertions;
@@ -27,9 +40,19 @@ class FeedbackBoard extends React.Component {
         <h4 data-testid="feedback-total-score">
           { finalScore }
         </h4>
+        <Link
+          to="/"
+          data-testid="btn-play-again"
+        >
+          Jogar novamente
+        </Link>
       </div>
     );
   }
 }
+
+FeedbackBoard.propTypes = {
+  history: PropTypes.objectOf(PropTypes.shape).isRequired,
+};
 
 export default FeedbackBoard;
