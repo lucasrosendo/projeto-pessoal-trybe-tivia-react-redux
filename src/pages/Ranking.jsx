@@ -15,7 +15,11 @@ class Ranking extends React.Component {
         >
           Ranking
         </h1>
-        <Link to="/" data-testid="btn-go-home">
+        <Link
+          to="/"
+          data-testid="btn-go-home"
+          className="login-form-btn"
+        >
           Retorna ao início
         </Link>
       </>
